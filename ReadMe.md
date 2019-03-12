@@ -4,9 +4,25 @@
 
 ## API简介
 
-欢迎使用MXC API，API分为[公共接口](#公共接口)和[私有接口](#私有接口)，你可以使用公共接口查询行情数据，并使用私有接口进行交易。对于私有接口，为了防止请求在网络传输过程中被篡改，您需要使用您的API Key做签名认证，以保证我们收到的请求为您本人发出。
+欢迎使用MXC API，API分为[公共接口](#公共接口)和[私有接口](#私有接口)，你可以使用公共接口查询行情数据，并使用私有接口进行交易。
 
-一个合法的MXC签名是将所有参数名按字母顺序排列，用&连接各参数，再加上您的api_secret，做MD5生成签名。需将签名放入参数sign中。
+对于私有接口，为了防止请求在网络传输过程中被篡改，您需要使用您的API Key做签名认证，以保证我们收到的请求为您本人发出。一个合法的MXC签名是将所有参数名按字母顺序排列，用&连接各参数，再加上您的api_secret，做MD5生成签名。需将签名放入参数sign中。
+>以`获取账户资产信息`接口为例，需要传的参数包括`api_key`，`req_time`和`sign`共三个，除去`sign`之外的参数都需要参与签名。
+>
+>如果您的`api_key`为`mmmyyyaaapppiiikkkeeeyyy`，您的`api_secret`为`ssseeecccrrreeettt`，当前的十位的时间戳为`1234567890`。
+>
+>首先将需要签名的参数按照参数名进行排序(首先比较所有参数名的第一个字母，按英文字母顺序排列，若遇到相同首字母，则看第二个字母，以此类推)。所以第一个参数为`api_key`，第二个参数为`req_time`。
+>
+>将参数和参数值用`=`进行连接：得到`api_key=mmmyyyaaapppiiikkkeeeyyy`和`req_time=1234567890`。
+>
+>将得到的值用`&`进行连接，得到`api_key=mmmyyyaaapppiiikkkeeeyyy&req_time=1234567890`
+>
+>在最后连接`&api_secret=ssseeecccrrreeettt`，得到`api_key=mmmyyyaaapppiiikkkeeeyyy&req_time=1234567890&api_secret=ssseeecccrrreeettt`。
+>
+>将得到的字符串用MD5摘要算法进行签名，得到`c90172772df116dd658141e853185517`，加入到`sign`参数中
+>
+>将`api_key`，`req_time`和`sign`三个参数放入请求中并发送请求
+
 
 ----
 
@@ -236,7 +252,7 @@ API HOST: **https://www.mxc.com**
 | id        |  订单id   |
 | market        |  交易对   |
 | price        |  挂单价   |
-| status        |  订单状态   |
+| status        |  订单状态，1:未成交 2:已成交 3:部分成交 4:已撤单 5:部分撤单   |
 | totalQuantity        |  挂单总量   |
 | tradedQuantity        |  挂单成交量   |
 | tradedAmount        |  挂单成交量(计价币)   |
@@ -291,7 +307,7 @@ API HOST: **https://www.mxc.com**
 | :--------:   | :-----:  |  :-----:  |  :-----:  |
 | api_key         | string   |  √   |  您的api key   |
 | market          | string   |  √   |  交易对   |
-| price            | string   |  √   |  交易价格   |
+| req_time            | string   |  √   |  请求时间戳   |
 | trade_no             | string   |  √   |  委托单号   |
 | sign          | string   |  √   |  请求签名   |
 
@@ -321,7 +337,7 @@ API HOST: **https://www.mxc.com**
 | api_key         | string   |  √   |  您的api key   |
 | req_time          | string   |  √   |  请求时间戳   |
 | market          | string   |  √   |  交易对   |
-| trade_type            | string   |  √   |  交易类型，0/1/2 (所有/买/卖)   |
+| trade_type            | string   |  √   |  交易类型，1/2 (买/卖)   |
 | page_num          | integer   |  √   |  页数   |
 | page_size             | integer   |  √   |  每页大小   |
 
@@ -337,7 +353,7 @@ API HOST: **https://www.mxc.com**
 | id        |  订单id   |
 | market        |  交易对   |
 | price        |  成交价格   |
-| status        |  状态   |
+| status        |  订单状态，1:未成交 2:已成交 3:部分成交 4:已撤单 5:部分撤单   |
 | totalQuantity        |  订单总量   |
 | createTime        |  订单时间   |
 | type        |  交易类型：1/2 (买/卖)   |
