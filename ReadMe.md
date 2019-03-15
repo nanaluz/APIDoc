@@ -36,6 +36,7 @@ API HOST: **https://www.mxc.com**
 * GET [/open/api/v1/data/history](#获取单个币种成交记录信息) 获取单个币种成交记录信息
 * GET [/open/api/v1/data/ticker](#获取市场行情信息) 获取市场行情信息
 * GET [/open/api/v1/data/kline](#获取市场k线信息) 获取市场k线信息
+
 私有接口：
 
 * GET [/open/api/v1/private/account/info](#获取账户资产信息) 获取账户资产信息
@@ -50,9 +51,8 @@ API HOST: **https://www.mxc.com**
 
 代码库中的python目录为Python的示例代码，java目录为java的示例代码。
 
-> #### 公共接口
 
-##### **获取市场列表信息**
+## **获取市场列表信息**
 
 * GET `/open/api/v1/data/markets`
 
@@ -77,7 +77,7 @@ API HOST: **https://www.mxc.com**
 
 ----
 
-##### **获取交易对信息**
+## **获取交易对信息**
 
 * GET `/open/api/v1/data/markets_info`
 
@@ -106,7 +106,7 @@ API HOST: **https://www.mxc.com**
 
 ----
 
-##### **获取深度信息**
+## **获取深度信息**
 
 * GET `/open/api/v1/data/depth`
 
@@ -134,7 +134,7 @@ API HOST: **https://www.mxc.com**
 
 ----
 
-##### **获取单个币种成交记录信息**
+## **获取单个币种成交记录信息**
 
 * GET `/open/api/v1/data/history`
 
@@ -163,7 +163,7 @@ API HOST: **https://www.mxc.com**
 
 ----
 
-##### **获取市场行情信息**
+## **获取市场行情信息**
 
 * GET `/open/api/v1/data/ticker`
 
@@ -195,7 +195,7 @@ API HOST: **https://www.mxc.com**
 
 ----
 
-##### **获取市场k线信息**
+## **获取市场k线信息**
 
 * GET `/open/api/v1/data/kline`
 
@@ -210,19 +210,20 @@ API HOST: **https://www.mxc.com**
 
 **返回值说明**
 
-```json
+```text
 [
   [
-  1552518000000,  开始时间
-  "0.02700818",   开盘价
-  "0.02701826",   收盘价
-  "0.02703995",   最高价  
-  "0.02699879",   最低价
-  "4147.5086",    成交量
-  "112.05043000089" 计价货币成交量
+    1552518000000,       # 开始时间
+    "0.02700818",        # 开盘价
+    "0.02701826",        # 收盘价
+    "0.02703995",        # 最高价  
+    "0.02699879",        # 最低价
+    "4147.5086",         # 成交量
+    "112.05043000089"    # 计价货币成交量
   ],
 ]
 ```
+
 | 返回值       |  说明   |
 | :--------:  | :-----:  |
 | time        |  开始时间   |
@@ -235,10 +236,7 @@ API HOST: **https://www.mxc.com**
 
 
 
-
-> #### 私有接口
-
-##### **获取账户资产信息**
+## **获取账户资产信息**
 
 * GET `/open/api/v1/private/account/info`
 
@@ -268,7 +266,7 @@ API HOST: **https://www.mxc.com**
 
 ----
 
-##### **获取当前委托信息**
+## **获取当前委托信息**
 
 * GET `/open/api/v1/private/current/orders`
 
@@ -308,7 +306,7 @@ API HOST: **https://www.mxc.com**
 
 ----
 
-##### **下单**
+## **下单**
 
 * POST `/open/api/v1/private/order`
 
@@ -340,7 +338,7 @@ API HOST: **https://www.mxc.com**
 
 ----
 
-##### **取消订单**
+## **取消订单**
 
 * DELETE `/open/api/v1/private/order`
 
@@ -369,7 +367,7 @@ API HOST: **https://www.mxc.com**
 
 ----
 
-##### **查询账号历史成交**
+## **查询账号历史成交**
 
 * GET `/open/api/v1/private/orders`
 
