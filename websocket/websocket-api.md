@@ -195,7 +195,7 @@ request **sub.personal**
 
 获取订阅私有接口数据的错误信息
 
-response **rs.error.msg** 
+response **rs.error** 
 
 **Response Payload**  
 
