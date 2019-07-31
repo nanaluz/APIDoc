@@ -243,17 +243,17 @@ response **push.personal.order**
 
 ```javascript
 {
-    "symbol":"ETH_USDT",
-    "data":{
-        "price":1,
-        "quantity":5,
-        "amount":5.01,
-        "remainAmount":5.01,
-        "remainQuantity":5,
-        "id":"069e29f4-8870-489f-aebf-d5aec5162bc2",
-        "status":1,
-        "tradeType":1,
-        "createTime":1561518653000
+    "symbol":"ETH_USDT",                                // 交易对
+    "data":{            
+        "price":1,                                      // 价格
+        "quantity":5,                                   // 量
+        "amount":5.01,                                  // 交易额（以计价货币计算）
+        "remainAmount":5.01,                            // 剩余交易额
+        "remainQuantity":5,                             // 剩余量
+        "id":"069e29f4-8870-489f-aebf-d5aec5162bc2",    // 订单id
+        "status":1,                                     // 订单状态  
+        "tradeType":1,                                  // 订单类型（1：买单。2：卖单）
+        "createTime":1561518653000                      // 订单创建时间戳
     }
 }
 ```
