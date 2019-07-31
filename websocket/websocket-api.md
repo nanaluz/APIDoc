@@ -251,7 +251,7 @@ response **push.personal.order**
         "remainAmount":5.01,                            // 剩余交易额
         "remainQuantity":5,                             // 剩余量
         "id":"069e29f4-8870-489f-aebf-d5aec5162bc2",    // 订单id
-        "status":1,                                     // 订单状态  
+        "status":1,                                     // 订单状态,1:未成交 2:已成交 3:部分成交 4:已撤单 5:部分撤单
         "tradeType":1,                                  // 订单类型（1：买单。2：卖单）
         "createTime":1561518653000                      // 订单创建时间戳
     }
