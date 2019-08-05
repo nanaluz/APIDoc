@@ -237,7 +237,6 @@ response **rs.error**
 ```
 
 response **push.personal.order**  
-如果数据里面全部为0那么代表订单撤单.请通过open api获取订单信息
 
 **Response Payload**  
 
