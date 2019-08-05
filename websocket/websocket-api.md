@@ -215,7 +215,7 @@ request **sub.personal**
 {
     "api_key": "api_key",	//申请的API Key	
     "sign": "b8d2ff6432798ef858782d7fd109ab41",	//签名,签名规则  把api_key、req_time用私钥做一个签名,参考python或者java的Sample
-    "req_time": "1561433613583"			//当前时间的时间搓
+    "req_time": "1561433613583"			//当前时间的时间戳
 }
 
 
