@@ -47,7 +47,7 @@ API HOST: **https://www.mxc.com**
 * GET [/open/api/v1/private/current/orders](#获取当前委托信息) 获取当前委托信息
 * POST [/open/api/v1/private/order](#下单) 下单
 * DELETE [/open/api/v1/private/order](#取消订单) 取消订单
-* GET [/open/api/v1/private/orders](#查询账号历史成交) 查询账号历史成交
+* GET [/open/api/v1/private/orders](#查询账号历史委托记录) 查询账号历史委托记录
 * GET [/open/api/v1/private/order](#查询订单状态) 查询订单状态
 
 ---
@@ -539,7 +539,7 @@ API HOST: **https://www.mxc.com**
 
 ----
 
-## **查询账号历史成交**
+## **查询账号历史委托记录**
 
 * GET `/open/api/v1/private/orders`
 
@@ -603,7 +603,7 @@ API HOST: **https://www.mxc.com**
 **示例**
 
 
-[python](#查询账号历史成交-python-demo)
+[python](#查询账号历史委托记录-python-demo)
 
 ----
 
@@ -819,7 +819,7 @@ response = requests.request('DELETE', url, params=params, headers=headers)
 print(response.json())
 ```
 
-> ###### 查询账号历史成交 python demo
+> ###### 查询账号历史委托记录 python demo
 
 ```python
 symbol = 'EOS_ETH'
