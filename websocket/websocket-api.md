@@ -2,7 +2,7 @@
 
 #	基本信息  
 
-WSS接口Base url: wss://www.mxc.com/
+WSS接口Base url: wss://www.mxc.ceo/
 
 ##	公共接口：
 ----
