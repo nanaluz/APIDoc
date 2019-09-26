@@ -30,7 +30,7 @@
 
 ----
 
-API HOST: **https://www.mxc.com**
+API HOST: **https://www.mxc.ceo**
 
 公共接口：
 
@@ -669,7 +669,7 @@ API HOST: **https://www.mxc.com**
 ```python
 import requests
 
-ROOT_URL = 'https://www.mxc.com'
+ROOT_URL = 'https://www.mxc.ceo'
 
 headers = {
     'Content-Type': 'application/json',
