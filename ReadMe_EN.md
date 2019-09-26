@@ -33,7 +33,7 @@ Notice:
 
 ----
 
-API HOST: **https://www.mxc.com**
+API HOST: **https://www.mxc.ceo**
 
 Public Interface：
 
@@ -624,7 +624,7 @@ The python directory in the codebase is sample codes for Python, Jave directory 
 ```python
 import requests
 
-ROOT_URL = 'https://www.mxc.com'
+ROOT_URL = 'https://www.mxc.ceo'
 
 headers = {
     'Content-Type': 'application/json',
