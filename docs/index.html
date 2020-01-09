@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MXC API</title>
+    <style>
+        body {
+            padding: 55px 0 0;
+            margin: 0;
+        }
+
+        header {
+            background: #2E3336;
+            height: 60px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header>div {
+            display: flex;
+            align-items: center;
+        }
+
+        header a {
+            display: inline-block;
+            height: 60px;
+            line-height: 60px;
+            color: #fff;
+            text-decoration: none;
+            padding: 0 20px;
+            cursor: pointer;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 16px;
+        }
+
+        header a:hover {
+            color: #41b37d;
+            box-shadow: inset 0 -2px 0 0 #41b37d;
+        }
+
+        header a.active {
+            color: #41b37d;
+            box-shadow: inset 0 -2px 0 0 #41b37d;
+        }
+
+        #toggle {
+            height: auto;
+            line-height: 1;
+            border: 1px solid #fff;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-right: 20px ;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 13px;
+        }
+        
+        #toggle:hover {
+            color: #41b37d;
+            border-color: #41b37d;
+            box-shadow: none;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 13px;
+        }
+
+        img {
+            height: 50px;
+        }
+
+        iframe {
+            width: 100%;
+            height: calc(100vh - 60px);
+        }
+    </style>
+    <link href="./images/favicon-7465a6e0.png" rel="icon" type="image/png">
+</head>
+
+<body>
+    <header>
+        <div>
+            <img src="./images/logo-0f661c53.png" alt="">
+            <div>
+                <a class="active" id="tab1">Spot</a>
+            </div>
+        </div>
+        <a id="toggle" onclick="toggleLanage()">English</a>
+    </header>
+    <iframe id="iframe" src="./index.html" frameborder="0"></iframe>
+    <script>
+        var languageSetting = localStorage.getItem('languageSetting') || 'en';
+        
+        function toggleLanage (isInit) {
+          var _iframe = document.getElementById('iframe'),
+          _tab1 = document.getElementById('tab1'),
+          _toggle = document.getElementById('toggle'),
+          docUrl = {
+              en: './open.api.v2.html',
+              cn: './cn/open.api.v2.html',
+          },
+          tab1 = {
+              en: 'REST API',
+              cn: 'REST API'
+          },
+          toggle = {
+              en: '中文',
+              cn: 'English'
+          };
+          if(!isInit){
+              languageSetting = languageSetting === 'cn'? 'en': 'cn';
+          }
+          localStorage.setItem('languageSetting',languageSetting);
+          
+          _iframe.src = docUrl[languageSetting];
+          _tab1.innerText = tab1[languageSetting];
+          _toggle.innerText = toggle[languageSetting];
+        }
+
+        toggleLanage(true)
+
+    </script>
+</body>
+
+</html>
