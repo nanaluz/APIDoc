@@ -1,9 +1,8 @@
 # MXC API
 
 * 本篇列出REST接口的baseurl:
-    **https://www.mxc.ceo**
-    **https://www.mxc.co** 
-    **https://www.mxcio.co**
+    **https://www.mxc.com**
+    **https://www.mxc.io** 
 * 所有接口的响应都是JSON格式
 * 公共接口请加入请求头，否则会返回403
 * GET方法的接口, 参数必须在query string中发送.

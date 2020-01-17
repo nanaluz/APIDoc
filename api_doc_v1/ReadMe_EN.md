@@ -33,7 +33,7 @@ Notice:
 
 ----
 
-API HOST: **https://www.mxc.com**
+API HOST: **https://www.mxc.com** or **https://www.mxc.io**
 
 Public Interface：
 
