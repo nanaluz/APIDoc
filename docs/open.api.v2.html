@@ -1284,7 +1284,7 @@ Period starts from the current 00:00 of UTC+8, and with maximum length of 24 hou
 <td>string</td>
 <td>N</td>
 <td>client order id</td>
-<td></td>
+<td>With maximum length of 32 characters</td>
 </tr>
 </tbody></table>
 
@@ -1450,8 +1450,8 @@ When client recieves response from server, it only means the cancelling request 
 <td>client_order_id</td>
 <td>string</td>
 <td>N</td>
-<td>client order id, can be used to differentiate the orders in a batch(for example can be an UUID)</td>
-<td></td>
+<td>client order id</td>
+<td>With maximum length of 32 characters</td>
 </tr>
 </tbody></table>
 
@@ -1470,6 +1470,10 @@ When client recieves response from server, it only means the cancelling request 
 <td>client order id and the corresponding new order id</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+It's the user's responsibility to maintain the uniqueness of the client order id
+</aside>
 
 <aside class="notice">
 For each batch request, the parameter client_order_id should be consistent, meaning if any of the order contains client_order_id, then all orders should contain client_order_id as well

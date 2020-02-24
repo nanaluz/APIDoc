@@ -1285,7 +1285,7 @@ api_key=mxcV9JCC8iu8zpaiWC&amp;req_time=1572936038
 <td>string</td>
 <td>否</td>
 <td>客户订单id</td>
-<td></td>
+<td>最大长度32位字符</td>
 </tr>
 </tbody></table>
 
@@ -1451,8 +1451,8 @@ api_key=mxcV9JCC8iu8zpaiWC&amp;req_time=1572936038
 <td>client_order_id</td>
 <td>string</td>
 <td>否</td>
-<td>客户订单id(每次提交的订单唯一标识(比如uuid)</td>
-<td></td>
+<td>客户订单id</td>
+<td>最大长度32位字符</td>
 </tr>
 </tbody></table>
 
@@ -1471,6 +1471,10 @@ api_key=mxcV9JCC8iu8zpaiWC&amp;req_time=1572936038
 <td>客户订单id(client_order_id)及对应订单号(order_id)</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+用户需要维护client order id的唯一性
+</aside>
 
 <aside class="notice">
 对于同一次批量下单的操作，参数中的订单元素需要统一客户订单id行为，不能有些元素带有客户订单id另一些元素不带
