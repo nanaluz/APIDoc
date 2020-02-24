@@ -353,13 +353,20 @@
 <td>新增</td>
 <td>REST API V2发布</td>
 </tr>
+<tr>
+<td>2020-02-24</td>
+<td>/open/api/v2/order/place<br/>/open/api/v2/order/place_batch<br/>/open/api/v2/order/cancel</td>
+<td>更新</td>
+<td>添加client order id支持</td>
+</tr>
 </tbody></table>
 <h1 id='2d07d50c97'>接入说明</h1><h2 id='url'>接入URL</h2>
 <p>请选用以下的baseurl进行API请求：</p>
 
 <ul>
-<li><code>https://www.mxc.com</code></li>
-<li><code>https://www.mxc.io</code></li>
+<li><code>https://www.mxc.ceo</code></li>
+<li><code>https://www.mxc.co</code></li>
+<li><code>https://www.mxcio.co</code></li>
 </ul>
 <h2 id='21d67c3c4c'>请求格式</h2>
 <p>相应API接受GET，POST或DELETE类型的请求</p>
@@ -439,13 +446,6 @@ api_key=mxcV9JCC8iu8zpaiWC&amp;limit=1000&amp;req_time=1572936251&amp;startTime=
 <pre class="highlight plaintext"><code>POST
 /api/v2/order/place_batch
 api_key=mxcV9JCC8iu8zpaiWC&amp;req_time=1572936038
-</code></pre>
-<blockquote>
-<p>HMAC SHA256 example</p>
-</blockquote>
-<pre class="highlight plaintext"><code>echo -n "GET
-/api/v2/order/open_orders
-api_key=mxcV9JCC8iu8zpaiWC&amp;limit=1000&amp;req_time=1572936251&amp;startTime=1572076703000&amp;symbol=MX_ETH&amp;tradeType=BUY" | openssl dgst -sha256 -hmac "secretKey"
 </code></pre>
 <p>首先构造签名目标串，以下各部分以换行符分隔<code>
 </code><br/><br/>1. 请求方法<br/>2. 请求URI<br/>3. 按字典序拼接api_key，req_time，recv_window（可选参数）及业务参数以<code>&amp;</code>间隔，并最终获得签名目标串（在批量操作的API中，若参数值中有逗号等特殊符号，这些符号在签名时需要做URL encode）</p>
@@ -1280,7 +1280,18 @@ api_key=mxcV9JCC8iu8zpaiWC&amp;limit=1000&amp;req_time=1572936251&amp;startTime=
 <td>订单类型</td>
 <td>LIMIT_ORDER，POST_ONLY，IMMEDIATE_OR_CANCEL</td>
 </tr>
+<tr>
+<td>client_order_id</td>
+<td>string</td>
+<td>否</td>
+<td>客户订单id</td>
+<td></td>
+</tr>
 </tbody></table>
+
+<aside class="notice">
+用户需要维护client order id的唯一性
+</aside>
 
 <p>响应：</p>
 
@@ -1325,8 +1336,14 @@ api_key=mxcV9JCC8iu8zpaiWC&amp;limit=1000&amp;req_time=1572936251&amp;startTime=
 <tr>
 <td>order_ids</td>
 <td>string</td>
-<td>是</td>
+<td>否</td>
 <td>订单号，支持批量撤单，各订单号以逗号分隔。最大批量操作数目为20</td>
+</tr>
+<tr>
+<td>client_order_ids</td>
+<td>string</td>
+<td>否</td>
+<td>客户订单id，支持批量撤单，各订单号以逗号分隔。最大批量操作数目为20</td>
 </tr>
 </tbody></table>
 
@@ -1345,6 +1362,10 @@ api_key=mxcV9JCC8iu8zpaiWC&amp;limit=1000&amp;req_time=1572936251&amp;startTime=
 <td>订单号及对应操作结果</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+请求参数为order_ids与client_order_ids二选一，两者都提供时，将忽略client_order_ids
+</aside>
 
 <aside class="notice">
 请求返回表示服务端接收到了对应订单的撤单请求，并不表示已经撤单完成
@@ -1452,7 +1473,7 @@ api_key=mxcV9JCC8iu8zpaiWC&amp;limit=1000&amp;req_time=1572936251&amp;startTime=
 </tbody></table>
 
 <aside class="notice">
-对于同一次批量下单的操作，参数中的订单元素需要统一客户订单id行为，不能有些元素带有客户订单id另一些元素不带。且客户订单id（client_order_id）不会被存储，仅用于将新生成的订单id与请求数据之间做一一对应
+对于同一次批量下单的操作，参数中的订单元素需要统一客户订单id行为，不能有些元素带有客户订单id另一些元素不带
 </aside>
 <h2 id='066ca582c9'>当前挂单</h2>
 <blockquote>
@@ -1646,8 +1667,8 @@ api_key=mxcV9JCC8iu8zpaiWC&amp;limit=1000&amp;req_time=1572936251&amp;startTime=
 <tr>
 <td>trade_type</td>
 <td>string</td>
-<td>否</td>
-<td>交易类型，不传则查全部</td>
+<td>是</td>
+<td>交易类型</td>
 <td>BID，ASK</td>
 </tr>
 <tr>

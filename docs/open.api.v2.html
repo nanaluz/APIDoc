@@ -353,13 +353,20 @@ At present the following tokens are available for API operation by default. Plea
 <td>Add</td>
 <td>REST API V2 released</td>
 </tr>
+<tr>
+<td>2020-02-24</td>
+<td>/open/api/v2/order/place<br/>/open/api/v2/order/place_batch<br/>/open/api/v2/order/cancel</td>
+<td>Update</td>
+<td>Add support for client order id</td>
+</tr>
 </tbody></table>
 <h1 id='integration-guide'>Integration guide</h1><h2 id='access-urls'>Access URLs</h2>
 <p>Please make API requests with the following base urls:</p>
 
 <ul>
-<li><code>https://www.mxc.com</code></li>
-<li><code>https://www.mxc.io</code></li>
+<li><code>https://www.mxc.ceo</code></li>
+<li><code>https://www.mxc.co</code></li>
+<li><code>https://www.mxcio.co</code></li>
 </ul>
 <h2 id='request-format'>Request Format</h2>
 <p>The APIs accept GET, POST or DELETE request, as will be described in later sections</p>
@@ -439,13 +446,6 @@ api_key=mxcV9JCC8iu8zpaiWC&amp;limit=1000&amp;req_time=1572936251&amp;startTime=
 <pre class="highlight plaintext"><code>POST
 /api/v2/order/place_batch
 api_key=mxcV9JCC8iu8zpaiWC&amp;req_time=1572936038
-</code></pre>
-<blockquote>
-<p>HMAC SHA256 example</p>
-</blockquote>
-<pre class="highlight plaintext"><code>echo -n "GET
-/api/v2/order/open_orders
-api_key=mxcV9JCC8iu8zpaiWC&amp;limit=1000&amp;req_time=1572936251&amp;startTime=1572076703000&amp;symbol=MX_ETH&amp;tradeType=BUY" | openssl dgst -sha256 -hmac "secretKey"
 </code></pre>
 <p>First we need to compose the target string, each part will be separated by line break <code>\n</code><br/><br/>1. HTTP request method, <code>GET</code>, <code>DELETE</code> or <code>POST</code><br/>2. Request URI<br/>3. Order the request parameters by name (asc): api_key, req_time, recv_window（optional）and business parameters. Concatenate the parameters with <code>&amp;</code>, at last append the secret key at the end of the string. As a result the string will be used for signing (when there is special characters like comma in parameter value, as in the batch processing APIs, these special characters need to be URL encoded)</p>
 
@@ -1279,7 +1279,18 @@ Period starts from the current 00:00 of UTC+8, and with maximum length of 24 hou
 <td>trade type</td>
 <td>LIMIT_ORDER，POST_ONLY，IMMEDIATE_OR_CANCEL</td>
 </tr>
+<tr>
+<td>client_order_id</td>
+<td>string</td>
+<td>N</td>
+<td>client order id</td>
+<td></td>
+</tr>
 </tbody></table>
+
+<aside class="notice">
+It's the user's responsibility to maintain the uniqueness of the client order id
+</aside>
 
 <p>Response：</p>
 
@@ -1324,8 +1335,14 @@ Period starts from the current 00:00 of UTC+8, and with maximum length of 24 hou
 <tr>
 <td>order_ids</td>
 <td>string</td>
-<td>Y</td>
+<td>N</td>
 <td>order id, cancel in batch is supported, the ids should be separated by comma. The maximum order count in a batch is 20</td>
+</tr>
+<tr>
+<td>client_order_ids</td>
+<td>string</td>
+<td>N</td>
+<td>translation missing: en.apis_spot_trade_cancel_order_req_remark_2</td>
 </tr>
 </tbody></table>
 
@@ -1344,6 +1361,10 @@ Period starts from the current 00:00 of UTC+8, and with maximum length of 24 hou
 <td>order id and the relevant processing result</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+Either order_ids or client_order_ids have to be picked as parameter. When both of them exist, the client_order_ids will be ignored
+</aside>
 
 <aside class="notice">
 When client recieves response from server, it only means the cancelling request has been accepted, doesn't mean the cancellation is finished
@@ -1451,7 +1472,7 @@ When client recieves response from server, it only means the cancelling request 
 </tbody></table>
 
 <aside class="notice">
-For each batch request, the parameter client_order_id should be consistent, meaning if any of the order contains client_order_id, then all orders should contain client_order_id as well. And please be noted the client_order_id will not be stored, it will only be used for checking the relationship between orders in request and newly created order id
+For each batch request, the parameter client_order_id should be consistent, meaning if any of the order contains client_order_id, then all orders should contain client_order_id as well
 </aside>
 <h2 id='open-orders'>Open Orders</h2>
 <blockquote>
@@ -1645,8 +1666,8 @@ For each batch request, the parameter client_order_id should be consistent, mean
 <tr>
 <td>trade_type</td>
 <td>string</td>
-<td>N</td>
-<td>order type, will query for both types if not included in request</td>
+<td>Y</td>
+<td>order type</td>
 <td>BID，ASK</td>
 </tr>
 <tr>
